@@ -1,0 +1,6 @@
+# Ignore all local files and back-end JUNit tests 
+/local
+
+# Exclude java classes
+*.class
+*.jar
