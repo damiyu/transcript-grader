@@ -213,6 +213,51 @@ public class Transcript {
     }
 
     /**
+     * A function to retrieve the course list of the transcript.
+     * 
+     * @return Course list of the transcript object
+     */
+    public HashSet<String> getCourseList() {
+        return courseList;
+    }
+
+    /**
+     * A get function that retrieves the GPA of the transcript.
+     * 
+     * @return The grade point average of the transcript
+     */
+    public Double getGPA() {
+        double GPA = 0.0;
+        try {
+            GPA = gradePnts / gradeUnits;
+        } catch (Exception e) {
+            return 0.0;
+        };
+
+        GPA = Math.round(GPA * 1000) / 1000.0;
+        return GPA;
+    }
+
+    /**
+     * This get function is used to get the total units of the transcript.
+     * 
+     * @return Total units of the transcript
+     */
+    public Double getCredits() {
+        return totUnits;
+    }
+
+    /**
+     * A function to check whether or not a specific course title is already exists.
+     * 
+     * @param courseName The course name being checked
+     * @return A boolean stating if the course is already in the transcript
+     */
+    public boolean contains(String courseName) {
+        return courseList.contains(courseName);
+    }
+
+    /**
      * This function is used to clear the transcript and zero all points/units.
      * The only thing preserved is the grade scale.
      */

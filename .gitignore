@@ -1,4 +1,4 @@
-# Ignore all local files and back-end JUNit tests 
+# Ignore all local files and back-end JUnit tests
 /local
 
 # Exclude java classes
