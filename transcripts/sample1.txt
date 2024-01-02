@@ -1,0 +1,7 @@
+add MATH-20C B- 4.0
+add PHYS-2A A 4.0
+add SE-1 A- 4.0
+add MMW-11 C+ 4.0
+print gpa
+
+exit

@@ -1,0 +1,18 @@
+add CSE-8A A+ 4.0
+add CSE-8B A 4.0
+add CSE-11 A- 4.0
+add CSE-12 B+ 4.0
+add CSE-15L B 2.0
+add CSE-20 B- 4.0
+add CSE-21 C+ 4.0
+add CSE-30 C 4.0
+add CSE-100 C- 4.0
+add CSE-101 D 4.0
+add CSE-105 F 4.0
+add CSE-140 P 4.0
+add CSE-140L NP 2.0
+add CSE-230 S 4.0
+add CSE-231 U 4.0
+print all
+
+exit

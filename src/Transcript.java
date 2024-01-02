@@ -155,7 +155,6 @@ public class Transcript {
                     Course c = sortedCourses.poll();
                     System.out.println(c.getName() + ", Grade Received: " + c.getGrade() + ", Units: " + c.getUnits());
                 }
-                System.out.println();
             case "scale":
                 System.out.println("\nGrade Scale:");
 
@@ -176,7 +175,6 @@ public class Transcript {
 
                 // Print the sorted grade scale (A+ : 4.0 \n A : 4.0 \n A- : 3.7 \n etc.)
                 for (String[] s : preSort) System.out.println(s[0] + " : " + s[1]);
-                System.out.println();
             case "lvl":
                 int gradeLvl = (int) totUnits / 45;
                 gradeLvl = gradeLvl > 3 ? 3 : gradeLvl;
@@ -282,19 +280,22 @@ public class Transcript {
      * @param file The path to the text file, not used if 'userInput' is true
      */
     public void gradeScan(Boolean userInput, String file) {
-        Scanner cmdScan = new Scanner(System.in);
+        Scanner cmdScan;
 
+        // Attempt the following scan and return if failed.
         try {
-            if (!userInput) {
-                cmdScan.close();
+            if (userInput) {
+                cmdScan = new Scanner(System.in);
+            } else {
                 File readFile = new File(file);
                 cmdScan = new Scanner(readFile);
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Invalid file path, please try again!");
             return;
         }
 
+        // A constant loop that processes input commands and print error messages.
         if (userInput) System.out.println("\nAwaiting user input:");
         while (cmdScan.hasNextLine()) {
             String[] cmdArgs = cmdScan.nextLine().split(" ");
@@ -310,33 +311,74 @@ public class Transcript {
                         } catch (Exception e) {
                             System.out.println("Invalid import values, try again!");
                         }
+                    } else {
+                        System.out.println("Invalid import argument count.");
+                        System.out.println("Must be in the format \"import <grade points> <graded units> <total units>\".");
                     }
                     break;
                 case "add":
+                    int quoteIdxBegin = -1, quoteIdxEnd = -1;
+
+                    // Attempt to find course titles seperated by spaces wrapped around double quotes.
+                    for (int i = 1; i < argCnt; i++) {
+                        if (cmdArgs[i].contains("\"")) { 
+                            if (quoteIdxBegin == -1) quoteIdxBegin = i;
+                            else quoteIdxEnd = i + 1;
+                        }
+                    }
+
+                    // There should only be two arguments after the last double quote.
+                    if (quoteIdxBegin != -1 && quoteIdxEnd != -1 && argCnt == quoteIdxEnd + 2) {
+                        argCnt = 4;
+                        cmdArgs[1] = String.join(" ", Arrays.copyOfRange(cmdArgs, quoteIdxBegin, quoteIdxEnd));
+                        cmdArgs[2] = cmdArgs[cmdArgs.length - 2];
+                        cmdArgs[3] = cmdArgs[cmdArgs.length - 1];
+                    }
+
                     if (argCnt == 4) {
                         try {
                             addGrade(cmdArgs[1], cmdArgs[2], Double.valueOf(cmdArgs[3]));
                         } catch (Exception e) {
                             System.out.println("Invalid add values, try again!");
                         }
+                    } else {
+                        System.out.println("Invalid add argument count.");
+                        System.out.println("Must be in the format \"add <course name> <course grade> <course credits>\".");
                     }
                     break;
                 case "print":
                     if (argCnt == 2) {
                         printGrades(cmdArgs[1]);
+                    } else {
+                        System.out.println("Invalid print argument count.");
+                        System.out.println("Must be in the format \"print (gpa || lvl || scale || all)\".");
                     }
                     break;
                 case "reset":
-                    if (argCnt == 1) {
-                        resetGrades();
-                    }
+                    resetGrades();
                     break;
                 case "read":
                     if (argCnt == 2) {
                         gradeScan(false, cmdArgs[1]);
+                    } else {
+                        System.out.println("Invalid read argument count.");
+                        System.out.println("Must be in the format \"read <file path>\".");
                     }
-                    cmdScan.close();
-                    return;
+                    break;
+                case "cls":
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
+                    break;
+                case "help":
+                    System.out.println("\nCommand Syntax:");
+                    System.out.println("add <course name> <course grade> <course credits>");
+                    System.out.println("import <grade points> <graded units> <total units>");
+                    System.out.println("read <file path>");
+                    System.out.println("print (gpa || lvl || scale || all)");
+                    System.out.println("cls");
+                    System.out.println("exit");
+                    System.out.println("help");
+                    break;
                 case "exit":
                     cmdScan.close();
                     return;
