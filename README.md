@@ -38,6 +38,7 @@ To streamline repetitive commands, you can write commands on a text file.
 Some examples are in `transcripts/`.
 A quicker and easier method would be to use the built-in JFrame, which is created with `make frame` in the cmd.
 Here is what the GUI of the JFrame looks like:
+
 ![Image](./src/media/jframe-gui.png)
 
 ### Adding a course to the transcript
