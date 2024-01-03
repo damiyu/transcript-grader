@@ -33,7 +33,7 @@ Both scales can be customized in `src/Transcript.java`.
 There are a total of five transcript modification operations: adding a new course, importing units, scanning a text file, printing information about the transcript, and resetting the transcript.
 To begin, you can pick between using the command line or a JFrame to update the transcript.
 To update the transcript through commands, run `make cmd` in the cmd.
-The command line option supports `add`, `import`, `read`, `print`, `reset`, `cls`, `exit`, and `help`.
+The command line option supports `add`, `import`, `read`, `print`, `reset`, `cls`, `help`, `exit`.
 To streamline repetitive commands, you can write commands on a text file.
 Some examples are in `transcripts/`.
 A quicker and easier method would be to use the built-in JFrame, which is created with `make frame` in the cmd.
@@ -333,11 +333,6 @@ Command Syntax: `cls`
 When the command line gets too cluttered, use this command to clear the cmd.
 Press the "Clear CMD" button on the JFrame to clear the cmd.
 
-### Exiting the program
-Command Syntax: `exit`
-To exit the program, enter the exit command on the command line.
-Delete the JFrame to exit the program.
-
 ### Incase of forgotten syntax
 Command Syntax: `help`
 Enter the help command if you forget the syntax of any command.
@@ -363,3 +358,8 @@ help
 Awaiting user input:
 > exit
 ```
+
+### Exiting the program
+Command Syntax: `exit`
+To exit the program, enter the exit command on the command line.
+Delete the JFrame to exit the program.

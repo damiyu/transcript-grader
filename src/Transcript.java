@@ -375,6 +375,7 @@ public class Transcript {
                     System.out.println("import <grade points> <graded units> <total units>");
                     System.out.println("read <file path>");
                     System.out.println("print (gpa || lvl || scale || all)");
+                    System.out.println("reset");
                     System.out.println("cls");
                     System.out.println("exit");
                     System.out.println("help");
